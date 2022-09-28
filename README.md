@@ -9,6 +9,13 @@
 - Create, Update and Delete post, only for authorized user
 - Create and Delete comment on posts
 
+## Built With
+
+- Node.js
+- [_Express.js_](https://expressjs.com)
+- [_MongoDB_](https://www.mongodb.com/)
+- [_Passport.js_](http://www.passportjs.org/)
+
 ## Installing and Getting Started
 
 To get started, clone the project
@@ -41,6 +48,14 @@ The server will be running at
 http://localhost:8080
 ```
 
+## .env
+
+create .env file and your
+
+- MONGO_URI
+- SECRET_KEY
+- JWT_TOKEN_SECRET
+
 ## API
 
 ```
@@ -72,17 +87,4 @@ http://localhost:8080/api
 | POST   | /comments/:id | Create a new comment on requested post id |
 | DELETE | /comments/:id | Remove a comment from requested post id   |
 
-## Built With
-
-- Node.js
-- [_Express.js_](https://expressjs.com)
-- [_MongoDB_](https://www.mongodb.com/)
-- [_Passport.js_](http://www.passportjs.org/)
-
-## .env
-
-create .env file and your
-
-- MONGO_URI
-- SECRET_KEY
-- JWT_TOKEN_SECRET
+Enjoy 👍
