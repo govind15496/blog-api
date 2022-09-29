@@ -4,6 +4,7 @@ const Post = require('../models/post');
 const Comment = require('../models/comment');
 const { isAdmin } = require('../middlewares/isAdmin');
 const { getUserIdFromHeader } = require('../utils/getUserIdFromHeader');
+const { isObjectIdValid } = require('../utils/isObjectIdValid');
 
 exports.post_list_get = async (req, res, next) => {
   Post.find()
@@ -77,19 +78,7 @@ exports.post_create_post = [
 
 exports.post_detail_get = async (req, res, next) => {
   try {
-    if (!req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
-      return res.status(404).json({
-        success: false,
-        message: 'Invalid id',
-        post: {},
-        errors: [
-          {
-            param: 'post',
-            msg: `Must be a string of 12 bytes or a string of 24 hex characters or an integer`,
-          },
-        ],
-      });
-    }
+    isObjectIdValid(req, res, 'post');
     const post = await Post.findById(req.params.id)
       .populate('comments', 'username comment')
       .populate('author', 'username')
@@ -183,19 +172,7 @@ exports.post_remove_delete = [
   isAdmin,
   async (req, res, next) => {
     try {
-      if (!req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
-        return res.status(404).json({
-          success: false,
-          message: 'Invalid id',
-          post: {},
-          errors: [
-            {
-              param: 'post',
-              msg: `Must be a string of 12 bytes or a string of 24 hex characters or an integer`,
-            },
-          ],
-        });
-      }
+      isObjectIdValid(req, res, 'post');
       const post = await Post.findById(req.params.id)
         .populate('author', 'username')
         .exec();

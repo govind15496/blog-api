@@ -3,6 +3,7 @@ const passport = require('passport');
 const Comment = require('../models/comment');
 const Post = require('../models/post');
 const { isAdmin } = require('../middlewares/isAdmin');
+const { isObjectIdValid } = require('../utils/isObjectIdValid');
 
 exports.comment_create_post = [
   // Validate and sanitize fields
@@ -36,19 +37,7 @@ exports.comment_create_post = [
     // Data is valid
 
     try {
-      if (!req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
-        return res.status(404).json({
-          success: false,
-          message: 'Invalid id',
-          comment: {},
-          errors: [
-            {
-              param: 'comment',
-              msg: `Must be a string of 12 bytes or a string of 24 hex characters or an integer`,
-            },
-          ],
-        });
-      }
+      isObjectIdValid(req, res, 'comment');
       const post = await Post.findById(req.params.id);
       if (!post) {
         return res.status(404).json({
@@ -91,19 +80,7 @@ exports.comment_remove_delete = [
   isAdmin,
   async (req, res, next) => {
     try {
-      if (!req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
-        return res.status(404).json({
-          success: false,
-          message: 'Invalid id',
-          comment: {},
-          errors: [
-            {
-              param: 'comment',
-              msg: `Must be a string of 12 bytes or a string of 24 hex characters or an integer`,
-            },
-          ],
-        });
-      }
+      isObjectIdValid(req, res, 'comment');
       const comment = await Comment.findById(req.params.id)
         .populate('username comment')
         .exec();
