@@ -39,7 +39,7 @@ npm run start
 Or run with Nodemon
 
 ```
-npm run devstart
+npm run dev
 ```
 
 The server will be running at
