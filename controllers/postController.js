@@ -8,7 +8,7 @@ const { isObjectIdValid } = require('../utils/isObjectIdValid');
 
 exports.post_list_get = async (req, res, next) => {
   Post.find()
-    .populate('comments', 'username comment')
+    .populate('comments', 'username comment createdAt')
     .populate('author', 'username')
     .sort({ updatedAt: -1, createdAt: -1 })
     .exec(function (err, list_posts) {
@@ -80,7 +80,7 @@ exports.post_detail_get = async (req, res, next) => {
   try {
     isObjectIdValid(req, res, 'post');
     const post = await Post.findById(req.params.id)
-      .populate('comments', 'username comment')
+      .populate('comments', 'username comment createdAt')
       .populate('author', 'username')
       .exec();
     if (!post) {
