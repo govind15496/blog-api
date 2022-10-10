@@ -2,6 +2,10 @@
 
 > Nodejs/Expressjs RESTful API , with authentication using Passport and JWT
 
+- Visit the client repo for this project [_here_](https://github.com/Ahmed-Mohadin/blog-client)👈
+
+- Visit the cms repo for this project [_here_](https://github.com/Ahmed-Mohadin/blog-cms)👈
+
 ## Features and Functionalities
 
 - Passport.js and JSON Web Token used for authentication
