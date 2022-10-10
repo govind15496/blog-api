@@ -144,14 +144,17 @@ exports.post_update_put = [
       }
       // Get user id from header
       const userId = getUserIdFromHeader(req.headers['authorization']);
+
+      const findPost = await Post.findById(req.params.id);
+
       // Create a Post object with escaped and trimmed data
       const post = new Post({
         title: req.body.title,
         content: req.body.content,
         author: userId,
         published: req.body.published,
-        comments: req.params.id,
-        _id: req.params.id,
+        comments: findPost.comments,
+        _id: findPost._id,
       });
 
       await Post.findByIdAndUpdate(req.params.id, post, {});
