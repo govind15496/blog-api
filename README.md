@@ -54,7 +54,7 @@ http://localhost:8080
 
 ## .env
 
-create .env file and your
+create .env file and add your
 
 - MONGO_URI
 - SECRET_KEY
